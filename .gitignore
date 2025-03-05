@@ -32,7 +32,7 @@ instance/
 *.sqlite3
 
 # Logs - Note: We're NOT ignoring the Logs folder to keep it accessible for debugging
-# Logs/
+Logs/
 
 # OS specific files
 .DS_Store

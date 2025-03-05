@@ -1,7 +1,7 @@
 import os
 import logging
 from app import create_app
-from app.models import db, User, MartialStatus
+from app.models import db, User, MaritalStatus
 from werkzeug.security import generate_password_hash
 
 # Set up logging
@@ -40,7 +40,7 @@ with app.app_context():
         ]
         
         for status in statuses:
-            existing = MartialStatus.query.filter_by(statusName=status).first()
+            existing = MaritalStatus.query.filter_by(statusName=status).first()
             if not existing:
                 db.session.add(MartialStatus(statusName=status))
                 logger.info(f"Added marital status: {status}")
