@@ -20,12 +20,12 @@ with app.app_context():
         logger.info("Database tables created successfully")
         
         # Check if admin user exists
-        admin = User.query.filter_by(phoneno='0000000').first()
+        admin = User.query.filter_by(phone_number='0000000').first()
         if not admin:
             # Create admin user
             admin = User(
                 fullname='Administrator',
-                phoneno='0000000',
+                phone_number='0000000',
                 password=generate_password_hash('admin', method="pbkdf2:sha256")
             )
             db.session.add(admin)
@@ -42,7 +42,7 @@ with app.app_context():
         for status in statuses:
             existing = MaritalStatus.query.filter_by(statusName=status).first()
             if not existing:
-                db.session.add(MartialStatus(statusName=status))
+                db.session.add(MaritalStatus(statusName=status))
                 logger.info(f"Added marital status: {status}")
         
         # Commit changes
