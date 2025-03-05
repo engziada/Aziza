@@ -146,7 +146,7 @@ dating_app/
 
 To revert to this checkpoint:
 ```
-git checkout <commit-hash>
+git checkout fd3f844d511d5b846f6546896f4bfe4516afeef5
 ```
 
 ## License | الترخيص
