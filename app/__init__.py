@@ -16,16 +16,17 @@ def create_admin_user(app):
     """
     from app.models import User
     from werkzeug.security import generate_password_hash
+    import sqlalchemy.exc
     
     with app.app_context():
-        # Check if admin already exists
-        admin = User.query.filter_by(phone_number='0000000').first()
-        if admin:
-            logger.info("Admin user already exists.")
-            return
-        
-        # Create admin user
         try:
+            # Check if admin already exists
+            admin = User.query.filter_by(phone_number='0000000').first()
+            if admin:
+                logger.info("Admin user already exists.")
+                return
+            
+            # Create admin user
             admin = User(
                 fullname='Administrator',
                 phone_number='0000000',
@@ -35,10 +36,14 @@ def create_admin_user(app):
             db.session.add(admin)
             db.session.commit()
             logger.info("Admin user created successfully.")
+        except sqlalchemy.exc.OperationalError as e:
+            # This will catch "no such table" errors
+            logger.warning(f"Database tables not ready: {str(e)}")
+            return
         except Exception as e:
             db.session.rollback()
             logger.error(f"Error creating admin user: {str(e)}")
-
+            
 def create_app(config_name='default'):
     """
     Application factory function.
