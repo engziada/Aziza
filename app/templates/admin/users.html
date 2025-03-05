@@ -1,0 +1,63 @@
+{% extends "theme.html" %}
+
+{% block title %}إدارة المستخدمين{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إدارة المستخدمين</h3>
+                </div>
+                <div class="card-body">
+                    {% if users %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>رقم المستخدم</th>
+                                    <th>الاسم الكامل</th>
+                                    <th>رقم الهاتف</th>
+                                    <th>نوع المستخدم</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.fullname }}</td>
+                                    <td>{{ user.phone_number }}</td>
+                                    <td>
+                                        {% if user.is_admin %}
+                                        <span class="badge bg-primary">مدير</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">مستخدم</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if not user.is_admin %}
+                                        <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" onsubmit="return confirm('هل أنت متأكد من حذف هذا المستخدم؟');">
+                                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                        </form>
+                                        {% else %}
+                                        <span class="text-muted">لا يمكن حذف المدير</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        لا يوجد مستخدمين حالياً.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

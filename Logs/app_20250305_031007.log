@@ -1,0 +1,7 @@
+2025-03-05 03:10:07,017 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 03:10:07,612 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050 [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:10:07,613 INFO: [33mPress CTRL+C to quit[0m [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:10:07,617 INFO:  * Restarting with stat [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:11:12,336 INFO:  * Restarting with stat [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:11:20,904 INFO:  * Restarting with stat [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]

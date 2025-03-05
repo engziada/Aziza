@@ -1,0 +1,72 @@
+{% extends "theme.html" %}
+
+{% block title %}إدارة الطلبات{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">إدارة طلبات التعارف</h3>
+                </div>
+                <div class="card-body">
+                    {% if requests %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>المرسل</th>
+                                    <th>المستقبل</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in requests %}
+                                <tr>
+                                    <td>{{ request.id }}</td>
+                                    <td>{{ request.requester.user.fullname }}</td>
+                                    <td>{{ request.target.user.fullname }}</td>
+                                    <td>{{ request.request_date.strftime('%Y-%m-%d') }}</td>
+                                    <td>
+                                        {% if request.status == 'pending' %}
+                                        <span class="badge bg-warning">قيد الانتظار</span>
+                                        {% elif request.status == 'approved' %}
+                                        <span class="badge bg-success">تمت الموافقة</span>
+                                        {% elif request.status == 'rejected' %}
+                                        <span class="badge bg-danger">تم الرفض</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if request.status == 'pending' %}
+                                        <div class="btn-group" role="group">
+                                            <form method="POST" action="{{ url_for('admin.approve_request', request_id=request.id) }}" style="display: inline;">
+                                                <button type="submit" class="btn btn-success btn-sm">موافقة</button>
+                                            </form>
+                                            <form method="POST" action="{{ url_for('admin.reject_request', request_id=request.id) }}" style="display: inline; margin-right: 5px;">
+                                                <button type="submit" class="btn btn-danger btn-sm">رفض</button>
+                                            </form>
+                                        </div>
+                                        {% else %}
+                                        <span class="text-muted">تم اتخاذ إجراء</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        لا توجد طلبات تعارف حالياً.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

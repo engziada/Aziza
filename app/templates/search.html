@@ -1,0 +1,77 @@
+{% extends "theme.html" %}
+
+{% block title %}البحث عن شريك{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">البحث عن شريك</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('profile.search') }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gender">الجنس</label>
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option value="">اختر الجنس</option>
+                                        <option value="MALE">ذكر</option>
+                                        <option value="FEMALE">أنثى</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="martialstatus">الحالة الاجتماعية</label>
+                                    <select class="form-control" id="martialstatus" name="martialstatus">
+                                        <option value="">اختر الحالة الاجتماعية</option>
+                                        {% for status in marital_statuses %}
+                                        <option value="{{ status.id }}">{{ status.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="min_age">العمر الأدنى</label>
+                                    <input type="number" class="form-control" id="min_age" name="min_age" placeholder="العمر الأدنى">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="max_age">العمر الأقصى</label>
+                                    <input type="number" class="form-control" id="max_age" name="max_age" placeholder="العمر الأقصى">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nationality">الجنسية</label>
+                                    <input type="text" class="form-control" id="nationality" name="nationality" placeholder="الجنسية">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city">المدينة</label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="المدينة">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">بحث</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

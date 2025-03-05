@@ -1,0 +1,3 @@
+2025-03-05 03:27:18,891 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 03:27:19,658 INFO: Admin user already exists. [in F:\PythonII\Dating\app\__init__.py:24]
+2025-03-05 03:27:19,662 ERROR: Error updating gender values: 'male' is not among the defined enum values. Enum name: gender. Possible values: MALE, FEMALE [in F:\PythonII\Dating\update_gender_values.py:48]

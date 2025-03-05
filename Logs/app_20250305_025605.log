@@ -1,4 +1,0 @@
-2025-03-05 02:56:05,895 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
-2025-03-05 02:56:06,780 WARNING:  * Debugger is active! [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
-2025-03-05 02:56:06,789 INFO:  * Debugger PIN: 752-258-082 [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
-2025-03-05 02:56:25,506 INFO: 127.0.0.1 - - [05/Mar/2025 02:56:25] "[33mGET /home HTTP/1.1[0m" 404 - [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]

@@ -81,6 +81,70 @@ class AdminService:
             return False, f"Error deleting user: {str(e)}"
     
     @staticmethod
+    def approve_request(request_id):
+        """
+        Approve a match request.
+        
+        Args:
+            request_id (int): Request's ID
+            
+        Returns:
+            tuple: (success boolean, message)
+        """
+        request = Request.query.get(request_id)
+        
+        if not request:
+            logger.warning(f"Request approval attempt for non-existent request ID: {request_id}")
+            return False, "Request does not exist"
+        
+        if request.status != 'pending':
+            logger.warning(f"Request approval attempt for non-pending request ID: {request_id}")
+            return False, "Request is not pending"
+        
+        try:
+            request.status = 'approved'
+            db.session.commit()
+            
+            logger.info(f"Request approved: ID {request_id}")
+            return True, "Request approved successfully"
+        except Exception as e:
+            db.session.rollback()
+            logger.error(f"Error approving request: {str(e)}")
+            return False, f"Error approving request: {str(e)}"
+    
+    @staticmethod
+    def reject_request(request_id):
+        """
+        Reject a match request.
+        
+        Args:
+            request_id (int): Request's ID
+            
+        Returns:
+            tuple: (success boolean, message)
+        """
+        request = Request.query.get(request_id)
+        
+        if not request:
+            logger.warning(f"Request rejection attempt for non-existent request ID: {request_id}")
+            return False, "Request does not exist"
+        
+        if request.status != 'pending':
+            logger.warning(f"Request rejection attempt for non-pending request ID: {request_id}")
+            return False, "Request is not pending"
+        
+        try:
+            request.status = 'rejected'
+            db.session.commit()
+            
+            logger.info(f"Request rejected: ID {request_id}")
+            return True, "Request rejected successfully"
+        except Exception as e:
+            db.session.rollback()
+            logger.error(f"Error rejecting request: {str(e)}")
+            return False, f"Error rejecting request: {str(e)}"
+    
+    @staticmethod
     def export_data(table_name):
         """
         Export data from a table to CSV.

@@ -8,42 +8,70 @@
         <h4>ترحب بكم</h4>
 
         <div class="links">
-            <a href="{{ url_for('login') }}">تسجيل الدخول</a>
-            <a href="{{ url_for('register') }} " class="active">مستخدم جديد</a>
+            <a href="{{ url_for('auth.login') }}">تسجيل الدخول</a>
+            <a href="{{ url_for('auth.register') }} " class="active">مستخدم جديد</a>
         </div>
 
-        <form action="{{ url_for('register') }}" method="post" autocomplete="off">
+        <form method="post" autocomplete="off">
+            {{ form.csrf_token }}
            
             <div style="display: flex;">
                 <label for="fullname">
                 <i class="fas fa-user"></i>
             </label>
-            <input type="text" name="fullname" placeholder="الإسم بالكامل" id="fullname" required>
+            {{ form.fullname(placeholder="الإسم بالكامل", id="fullname", required=true) }}
             </div>
+            {% if form.fullname.errors %}
+                {% for error in form.fullname.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
 
             <div style="display: flex;">
-            <label for="phoneno">
+                <label for="phoneno">
                 <i class="fas fa-phone"></i>
             </label>
-            <input type="number" name="phoneno" placeholder="رقم الجوال (يحتوي على كود الدولة)" id="phoneno" required>
+            {{ form.phoneno(placeholder="رقم الجوال (يحتوي على كود الدولة)", id="phoneno", required=true) }}
             </div>
+            {% if form.phoneno.errors %}
+                {% for error in form.phoneno.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
 
             <div style="display: flex;">
-            <label for="password">
+                <label for="password">
                 <i class="fas fa-lock"></i>
             </label>
-            <input type="password" name="password" placeholder="كلمة المرور" id="password" required>
+            {{ form.password(placeholder="كلمة المرور", id="password", required=true) }}
             </div>
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
 
-            {% with messages = get_flashed_messages() %}
+            <div style="display: flex;">
+                <label for="confirm_password">
+                <i class="fas fa-lock"></i>
+            </label>
+            {{ form.confirm_password(placeholder="تأكيد كلمة المرور", id="confirm_password", required=true) }}
+            </div>
+            {% if form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                    {% for message in messages %}
-                        <a class="hideMe" style="color: red;">{{ message }}</a>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} hideMe">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
-    		{% endwith %}
+            {% endwith %}
 
-            <input type="submit" value="حفظ">
+            {{ form.submit(value="تسجيل") }}
         </form>
     </div>
 {%endblock%}

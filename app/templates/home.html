@@ -1,271 +1,195 @@
 {% extends 'theme.html' %}
 
-{% block title %}الصفحة الرئيسية{% endblock %}
+{% block title %}
+البحث
+{% endblock %}
 
 {% block content %}
-        <div class="search container">
-            <p class="text-center fs-2 fw-bold text-primary my-2">بحث عن شريك</p>
-            <hr>
-
-            <form action="{{ url_for('home') }}" method="post" autocomplete="on">
-            <table class="table">
-                <tr>
-                    <td>
-                        <label class="form-label" for="gender">أبحث عن</label>
-                        <div class="form-group radio">
-                            <input type="radio" name="gender" value="ذكر"  id="gender" checked/>
-                            <span class="radio-span">ذكر</span>
-                            <input type="radio" name="gender" value="أنثى" id="gender"/>
-                            <span class="radio-span">أنثى </span>
-                        </div>
-                    </td>
-
-                    <td>
-                        <label class="form-label" for="smokingstatus">مدخن</label>
-                        <div class="form-group radio">
-                            <input type="radio" name="smokingstatus" value="1"  id="smokingstatus" checked/>
-                            <span class="radio-span">نعم</span>
-                            <input type="radio" name="smokingstatus" value="0" id="smokingstatus"/>
-                            <span class="radio-span">لا </span>
-                        </div>
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <label class="form-label" for="age">العمر</label>
-                        <table>
-                            <tr>
-                                <td><a> من </a><a id="ageMinValue">{%if data%}{{data['ageMin']}}{%else%}20{%endif%}</a></td>
-                                <td><a> إلى </a><a id="ageMaxValue">{%if data%}{{data['ageMax']}}{%else%}80{%endif%}</a></td>
-                            </tr>
-                            <tr>
-                                <td><input name="ageMin" id="ageMin" type="range" min="18" max="120" value="{%if data%}{{data['ageMin']}}{%else%}20{%endif%}" oninput="ageMax.min=this.value; ageMinValue.innerText = this.value; "></td>
-                                <td><input name="ageMax" id="ageMax" type="range" min="18" max="120" value="{%if data%}{{data['ageMax']}}{%else%}80{%endif%}" oninput="ageMaxValue.innerText = this.value"></td>
-                            </tr>                
-                        </table>
-                    </td>
-                </tr>
+<div class="container">
+    <h2 class="section-header text-center mb-4">البحث عن شريك الحياة</h2>
+    
+    <div class="search-form-container mb-4">
+        <form method="post" action="{{ url_for('profile.home') }}" class="search-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="gender" class="form-label">الجنس</label>
+                        <select name="gender" id="gender" class="form-select">
+                            <option value="MALE" {% if data['gender'] == 'MALE' %}selected{% endif %}>ذكر</option>
+                            <option value="FEMALE" {% if data['gender'] == 'FEMALE' %}selected{% endif %}>أنثى</option>
+                        </select>
+                    </div>
+                </div>
                 
-                <tr>
-
-                    <td>
-                        <label class="form-label" for="color">لون البشرة</label>
-                        <input type="text" name="color" placeholder="لون البشرة" id="color" value="{{data['color']}}">
-                    </td>
-
-                    <td>
-                        <label class="form-label" for="nationality">الجنسية</label>
-                        <input type="text" name="nationality" placeholder="الجنسية" id="nationality" value="{{data['nationality']}}">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <label class="form-label" for="weight">الوزن (كجم)</label>
-                        <table>
-                            <tr>
-                                <td><a> من </a><a id="weightMinValue">{%if data%}{{data['weightMin']}}{%else%}60{%endif%}</a></td>
-                                <td><a> إلى </a><a id="weightMaxValue">{%if data%}{{data['weightMax']}}{%else%}100{%endif%}</a></td>
-                            </tr>
-                            <tr>
-                                <td><input name="weightMin" id="weightMin" type="range" min="50" max="200" value="{%if data%}{{data['weightMin']}}{%else%}60{%endif%}" oninput="weightMax.min=this.value; weightMinValue.innerText = this.value; "></td>
-                                <td><input name="weightMax" id="weightMax" type="range" min="50" max="200" value="{%if data%}{{data['weightMax']}}{%else%}100{%endif%}" oninput="weightMaxValue.innerText = this.value"></td>
-                            </tr>                
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- <tr>
-                    <td>
-                        <label class="form-label" for="marriagetype">نوع الزواج</label>
-                        <div id="list1" class="dropdown-check-list">
-                            <span class="anchor">نوع الزواج</span>
-                            <ul class="items">
-                                <li><input type="checkbox" name="marriagetype" value="علني" {{ "checked" if marriagetype else "" }}/>علني</li>
-                                <li><input type="checkbox" name="marriagetype" value="سري" {{ "checked" if marriagetype else "" }}/>سري</li>
-                            </ul>
-                        </div>
-                    </td>
-
-
-                    <td colspan="2">
-                        <label class="form-label" for="martialstatus">الحالة الإجتماعية</label>
-                        <div id="list2" class="dropdown-check-list">
-                            <span class="anchor">الحالة الإجتماعية</span>
-                            <ul class="items">
-                                <li><input type="checkbox" name="martialstatus" value="أعزب" {{ "checked" if martialstatus else "" }}/>أعزب</li>
-                                <li><input type="checkbox" name="martialstatus" value="متزوج و لدي أبناء" {{ "checked" if martialstatus else "" }}/>متزوج و لدي أبناء</li>
-                                <li><input type="checkbox" name="martialstatus" value="متزوج و ليس لدي أبناء" {{ "checked" if martialstatus else "" }}/>متزوج و ليس لدي أبناء</li>
-                                <li><input type="checkbox" name="martialstatus" value="مطلق و لدي أبناء" {{ "checked" if martialstatus else "" }}/>مطلق و لدي أبناء</li>
-                                <li><input type="checkbox" name="martialstatus" value="مطلق و ليس لدي أبناء" {{ "checked" if martialstatus else "" }}/>مطلق و ليس لدي أبناء</li>
-                                <li><input type="checkbox" name="martialstatus" value="أرمل و لدي أبناء" {{ "checked" if martialstatus else "" }}/>أرمل و لدي أبناء</li>
-                                <li><input type="checkbox" name="martialstatus" value="أرمل و ليس لدي أبناء" {{ "checked" if martialstatus else "" }}/>أرمل و ليس لدي أبناء</li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr> -->
-
-                <tr>
-                    <td colspan="2">
-                        <label class="form-label" for="length">الطول (سم)</label>
-                        <table>
-                            <tr>
-                                <td><a> من </a><a id="lengthMinValue">{%if data%}{{data['lengthMin']}}{%else%}150{%endif%}</a></td>
-                                <td><a> إلى </a><a id="lengthMaxValue">{%if data%}{{data['lengthMax']}}{%else%}170{%endif%}</a></td>
-                            </tr>
-                            <tr>
-                                <td><input name="lengthMin" id="lengthMin" type="range" min="50" max="250" value="{%if data%}{{data['lengthMin']}}{%else%}150{%endif%}" oninput="lengthMax.min=this.value; lengthMinValue.innerText = this.value; "></td>
-                                <td><input name="lengthMax" id="lengthMax" type="range" min="50" max="250" value="{%if data%}{{data['lengthMax']}}{%else%}170{%endif%}" oninput="lengthMaxValue.innerText = this.value"></td>
-                            </tr>                
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- <tr>
-                    <td>
-                        <label for="qabila">القبيلة</label>
-                        <input type="text" name="qabila" placeholder="القبيلة" id="qabila" value="{{data['qabila']}}">
-                    </td>
-                    <td>
-                        <label for="area">المنطقة</label>
-                        <input type="text" name="area" placeholder="المنطقة" id="area" value="{{data['area']}}">
-                    </td>
-                    <td>
-                        <label for="city">المدينة</label>
-                        <input type="text" name="city" placeholder="المدينة" id="city" value="{{data['city']}}">
-                    </td>
-                </tr>
- -->
-            </table>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="nationality" class="form-label">الجنسية</label>
+                        <input type="text" name="nationality" id="nationality" class="form-control" value="{{ data['nationality'] }}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="min_age" class="form-label">العمر من</label>
+                        <select name="min_age" id="min_age" class="form-select">
+                            {% for i in range(18, 80) %}
+                                <option value="{{ i }}" {% if data['min_age'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="max_age" class="form-label">العمر إلى</label>
+                        <select name="max_age" id="max_age" class="form-select">
+                            {% for i in range(18, 80) %}
+                                <option value="{{ i }}" {% if data['max_age'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="min_height" class="form-label">الطول من (سم)</label>
+                        <select name="min_height" id="min_height" class="form-select">
+                            {% for i in range(140, 210, 5) %}
+                                <option value="{{ i }}" {% if data['min_height'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="max_height" class="form-label">الطول إلى (سم)</label>
+                        <select name="max_height" id="max_height" class="form-select">
+                            {% for i in range(140, 210, 5) %}
+                                <option value="{{ i }}" {% if data['max_height'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="min_weight" class="form-label">الوزن من (كجم)</label>
+                        <select name="min_weight" id="min_weight" class="form-select">
+                            {% for i in range(40, 150, 5) %}
+                                <option value="{{ i }}" {% if data['min_weight'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="max_weight" class="form-label">الوزن إلى (كجم)</label>
+                        <select name="max_weight" id="max_weight" class="form-select">
+                            {% for i in range(40, 150, 5) %}
+                                <option value="{{ i }}" {% if data['max_weight'] == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="color" class="form-label">لون البشرة</label>
+                        <select name="color" id="color" class="form-select">
+                            <option value="" {% if data['color'] == '' %}selected{% endif %}>الكل</option>
+                            <option value="أبيض" {% if data['color'] == 'أبيض' %}selected{% endif %}>أبيض</option>
+                            <option value="قمحي" {% if data['color'] == 'قمحي' %}selected{% endif %}>قمحي</option>
+                            <option value="أسمر" {% if data['color'] == 'أسمر' %}selected{% endif %}>أسمر</option>
+                            <option value="أسمر غامق" {% if data['color'] == 'أسمر غامق' %}selected{% endif %}>أسمر غامق</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="smoking" class="form-label">التدخين</label>
+                        <select name="smoking" id="smoking" class="form-select">
+                            <option value="" {% if data['smoking'] == '' %}selected{% endif %}>الكل</option>
+                            <option value="1" {% if data['smoking'] == '1' %}selected{% endif %}>مدخن</option>
+                            <option value="0" {% if data['smoking'] == '0' %}selected{% endif %}>غير مدخن</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-lg">بحث</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {% if profiles %}
+    <div class="search-results mt-4">
+        <h3 class="mb-3">نتائج البحث</h3>
         
-            <input type="submit" name="Search" value="بحث">
-            </form>
-
+        <div class="row">
+            {% for profile in profiles %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <h4>{{ profile.user.fullname }}</h4>
+                        <span class="profile-id">ID: {{ profile.id }}</span>
+                    </div>
+                    
+                    <div class="profile-body">
+                        <div class="profile-info">
+                            <p><i class="fas fa-venus-mars me-2"></i> الجنس: {{ 'ذكر' if profile.gender == 'MALE' else 'أنثى' }}</p>
+                            <p><i class="fas fa-birthday-cake me-2"></i> العمر: {{ profile.age }}</p>
+                            <p><i class="fas fa-flag me-2"></i> الجنسية: {{ profile.nationality }}</p>
+                            <p><i class="fas fa-map-marker-alt me-2"></i> المدينة: {{ profile.city }}</p>
+                            <p><i class="fas fa-ruler-vertical me-2"></i> الطول: {{ profile.height }} سم</p>
+                            <p><i class="fas fa-weight me-2"></i> الوزن: {{ profile.weight }} كجم</p>
+                            <p><i class="fas fa-palette me-2"></i> لون البشرة: {{ profile.skin_color }}</p>
+                            <p><i class="fas fa-smoking me-2"></i> التدخين: {{ 'نعم' if profile.smoking else 'لا' }}</p>
+                        </div>
+                        
+                        {% if profile.description %}
+                        <div class="profile-description mt-3">
+                            <h5>نبذة:</h5>
+                            <p>{{ profile.description }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if profile.partner_requirements %}
+                        <div class="profile-requirements mt-3">
+                            <h5>مواصفات الشريك:</h5>
+                            <p>{{ profile.partner_requirements }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="profile-footer">
+                        <form method="post" action="{{ url_for('profile.request_match') }}">
+                            <input type="hidden" name="profile_id" value="{{ profile.id }}">
+                            <button type="submit" class="btn btn-success">طلب تعارف</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-
-        <div class="searchresults table-responsive">
-            {%if searchResults%}
-            <p>نتائج البحث</p>
-            <table class="table table-striped table-hover border-primary table-sm">
-                <thead>
-                    <tr>
-                        <th>الكود</th>
-                        <th>الجنسية</th>
-                        <th>العمر</th>
-                        <!-- <th>الطول</th> -->
-                        <!-- <th>الوزن</th> -->
-                        <th>لون البشرة</th>
-                        <!-- <th>الحالة الوظيفية</th> -->
-                        <!-- <th>القبيلة</th> -->
-                        <!-- <th>مدخن</th> -->
-                        <th>الحالة الإجتماعية</th>
-                        <!-- <th>المنطقة</th> -->
-                        <!-- <th>المدينة</th> -->
-                        <!-- <th>منطقه الأصل</th> -->
-                        <th>المؤهل الدراسى</th>
-                        <th>نوع الزواج</th>
-                        <!-- <th>هل تقبل بجنسية أخرى</th>
-                        <th>تحدث عن نفسك</th>
-                        <th>الشروط المطلوبة فى الطرف الأخر</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {%for row in searchResults%}
-                    <tr>
-                        <td>{{row.idman}}</td>
-                        <td>{{row.nationality}}</td>
-                        <td>{{row.age}}</td>
-                        <!-- <td>{{row.length}}</td> -->
-                        <!-- <td>{{row.weight}}</td> -->
-                        <td>{{row.color}}</td>
-                        <!-- <td>{{row.qabila}}</td> -->
-                        <td>{{row.martialstatus}}</td>
-                        <!-- <td>{{row.area}}</td> -->
-                        <!-- <td>{{row.city}}</td> -->
-                        <td>{{row.qualifications}}</td>
-                        <td>{{row.marriagetype}}</td>
-                        <!-- <td>{{row.anothernationality}}</td>
-                        <td>{{row.about}}</td>
-                        <td>{{row.requirments}}</td> -->
-                        <!-- <td>{{row.userid}}</td>
-                        <td>{{row.gender}}</td> -->
-                    </tr>
-                    <tr>
-                        <td colspan="12">
-                            <details>
-                                <summary>تفاصيل أكثر ...</summary>
-                                <table>
-                                    <tr>
-                                        <td>تاريخ الإشتراك</td>
-                                        <td>{{row.created}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>الطول</td>
-                                        <td>{{row.length}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>الوزن</td>
-                                        <td>{{row.weight}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>الحالة الوظيفية</td>
-                                        <td>{{row.jobstatus}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>مدخن؟</td>
-                                        <td>{%if row.smokingstatus%}نعم{%else%}لا{%endif%}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>المدينة</td>
-                                        <td>{{row.city}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>منطقة الأصل</td>
-                                        <td>{{row.origin}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>القبيلة</td>
-                                        <td>{{row.qabila}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>المنطقة</td>
-                                        <td>{{row.area}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>هل يقبل بجنسية أخرى</td>
-                                        <td>{%if row.anothernationality%}نعم{%else%}لا{%endif%}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>عن المشترك</td>
-                                        <td>{{row.about}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>عن الشريك</td>
-                                        <td>{{row.requirments}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <form class="form" method="post" action="#">
-                                                <input type="hidden" id="requesterid" name="requesterid" value="{{session['userid']}}">
-                                                <input type="hidden" id="targetid" name="targetid" value="{{row.userid}}">
-                                                <input class="form-control btn btn-primary" type="submit" name="Request" value="طلب تواصل">
-                                            </form>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </details>
-                        </td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-            {%else%}
-                <p>لا توجد نتائج</p>
-            {%endif%}
-        </div>
-        <!-- <iframe frameborder='0' noresize='noresize' style='position: absolute; background: transparent; width: 100%; height:100%;' src="{{ url_for('profile') }}" frameborder="0"></iframe> -->
-
+    </div>
+    {% elif request.method == 'POST' %}
+    <div class="alert alert-info mt-4">
+        <p>لا توجد نتائج مطابقة لمعايير البحث.</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

@@ -119,13 +119,32 @@ class ProfileService:
             query = query.filter(Profile.age <= search_criteria['max_age'])
         
         if 'nationality' in search_criteria and search_criteria['nationality']:
-            query = query.filter(Profile.nationality == search_criteria['nationality'])
+            query = query.filter(Profile.nationality.like(f"%{search_criteria['nationality']}%"))
         
         if 'city' in search_criteria and search_criteria['city']:
-            query = query.filter(Profile.city == search_criteria['city'])
+            query = query.filter(Profile.city.like(f"%{search_criteria['city']}%"))
         
         if 'marital_status_id' in search_criteria and search_criteria['marital_status_id']:
             query = query.filter(Profile.marital_status_id == search_criteria['marital_status_id'])
+            
+        # Additional search criteria
+        if 'skin_color' in search_criteria and search_criteria['skin_color']:
+            query = query.filter(Profile.skin_color.like(f"%{search_criteria['skin_color']}%"))
+            
+        if 'min_height' in search_criteria and search_criteria['min_height']:
+            query = query.filter(Profile.height >= search_criteria['min_height'])
+            
+        if 'max_height' in search_criteria and search_criteria['max_height']:
+            query = query.filter(Profile.height <= search_criteria['max_height'])
+            
+        if 'min_weight' in search_criteria and search_criteria['min_weight']:
+            query = query.filter(Profile.weight >= search_criteria['min_weight'])
+            
+        if 'max_weight' in search_criteria and search_criteria['max_weight']:
+            query = query.filter(Profile.weight <= search_criteria['max_weight'])
+            
+        if 'smoking_status' in search_criteria and search_criteria['smoking_status']:
+            query = query.filter(Profile.smoking_status == search_criteria['smoking_status'])
         
         # Execute query and return results
         profiles = query.all()

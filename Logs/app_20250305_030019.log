@@ -1,0 +1,4 @@
+2025-03-05 03:00:19,630 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 03:00:20,468 WARNING:  * Debugger is active! [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:00:20,475 INFO:  * Debugger PIN: 132-194-637 [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 03:00:22,751 INFO:  * Detected change in 'F:\\PythonII\\Dating\\app\\auth\\routes.py', reloading [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]

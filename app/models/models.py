@@ -7,8 +7,8 @@ db = SQLAlchemy()
 
 class Gender(enum.Enum):
     """Enum for gender options."""
-    MALE = 'male'
-    FEMALE = 'female'
+    MALE = 'MALE'
+    FEMALE = 'FEMALE'
 
 class SmokingStatus(enum.Enum):
     """Enum for smoking status options."""
@@ -57,7 +57,6 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.fullname}>'
 
-
 class Profile(db.Model):
     """
     Profile model representing the 'profile' table in the database.
@@ -104,7 +103,6 @@ class Profile(db.Model):
     def __repr__(self):
         return f'<Profile {self.id}>'
 
-
 class MaritalStatus(db.Model):
     """
     MaritalStatus model representing the 'marital_status' table in the database.
@@ -117,7 +115,6 @@ class MaritalStatus(db.Model):
     
     def __repr__(self):
         return f'<MaritalStatus {self.status_name}>'
-
 
 class Request(db.Model):
     """

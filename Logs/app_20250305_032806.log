@@ -1,0 +1,3 @@
+2025-03-05 03:28:06,095 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 03:28:06,821 INFO: Admin user already exists. [in F:\PythonII\Dating\app\__init__.py:24]
+2025-03-05 03:28:06,823 ERROR: Error updating gender values: no such table: profile [in F:\PythonII\Dating\update_gender_sql.py:49]

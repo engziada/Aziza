@@ -1,0 +1,50 @@
+{% extends "theme.html" %}
+
+{% block title %}نتائج البحث{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">نتائج البحث</h3>
+                </div>
+                <div class="card-body">
+                    {% if profiles %}
+                    <div class="row">
+                        {% for profile in profiles %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ profile.user.fullname }}</h5>
+                                    <p class="card-text">
+                                        <strong>العمر:</strong> {{ profile.age }} سنة<br>
+                                        <strong>الجنس:</strong> {{ "ذكر" if profile.gender and profile.gender.value == "MALE" else "أنثى" }}<br>
+                                        <strong>الجنسية:</strong> {{ profile.nationality }}<br>
+                                        <strong>المدينة:</strong> {{ profile.city }}<br>
+                                        <strong>الحالة الاجتماعية:</strong> {{ profile.marital_status.name if profile.marital_status else "غير محدد" }}
+                                    </p>
+                                    <form method="POST" action="{{ url_for('profile.request_match') }}">
+                                        <input type="hidden" name="idman" value="{{ profile.id }}">
+                                        <button type="submit" class="btn btn-primary">طلب تعارف</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">
+                        لا توجد نتائج مطابقة لمعايير البحث.
+                    </div>
+                    {% endif %}
+                    <div class="mt-3">
+                        <a href="{{ url_for('profile.search') }}" class="btn btn-secondary">العودة للبحث</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

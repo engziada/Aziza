@@ -1,0 +1,11 @@
+2025-03-05 03:34:32,141 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 03:34:32,989 INFO: Admin user already exists. [in F:\PythonII\Dating\app\__init__.py:24]
+2025-03-05 03:34:33,026 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050 [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:34:33,028 INFO: [33mPress CTRL+C to quit[0m [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:34:33,033 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:37:43,949 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:38:08,855 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:38:29,679 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:38:43,604 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]
+2025-03-05 03:39:24,808 INFO:  * Restarting with stat [in C:\Users\muhammad.ziada\AppData\Local\Programs\Python\Python311\Lib\site-packages\werkzeug\_internal.py:96]

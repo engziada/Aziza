@@ -1,0 +1,61 @@
+{% extends 'login_theme.html' %}
+
+{%block title%}تسجيل الدخول{%endblock%}
+
+{%block content%}
+    <div class="login">
+        <h1>السفيرة عزيزة</h1>
+        <h4>ترحب بكم</h4>
+
+        <div class="links">
+            <a href="{{ url_for('auth.login') }}" class="active">تسجيل الدخول</a>
+            <a href="{{ url_for('auth.register') }}">مستخدم جديد</a>
+        </div>
+
+        <form method="post" id="form1">
+            {{ form.csrf_token }}
+
+            <div style="display: flex;">
+            <label for="username">
+                <i class="fas fa-phone"></i>
+            </label>
+            {{ form.username(placeholder="رقم الجوال (يحتوي على كود الدولة)", id="username", required=true, oninput="if (this.value>0) forgetpasswordform.style='display:Block'; else forgetpasswordform.style='display:None'; targetphoneno.value=this.value") }}
+            </div>
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+
+            <div style="display: flex;">
+            <label for="password">
+                <i class="fas fa-lock"></i>
+            </label>
+            {{ form.password(placeholder="كلمة المرور", id="password", required=true) }}
+            </div>
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} hideMe">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+    		{% endwith %}
+
+            {{ form.submit(id="login", value="دخول") }}
+        </form>
+
+        <div id="forgetpasswordform" name="forgetpasswordform" style="display: none;">
+        <hr>
+            <form action="{{ url_for('auth.forget_password') }}" method="post" onsubmit="return confirm('هل أنت متأكد ؟\n سيتم إرسال رسالة نصية بكلمة المرور الجديدة');">
+                <input type="hidden" name="phoneno" id="targetphoneno">
+                <input type="submit" class="link-button" id="forgetpassword" name="forgetpassword" value="نسيت كلمة المرور؟"/>
+            </form>
+        </div>
+    </div>
+{%endblock%}

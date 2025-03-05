@@ -1,0 +1,5 @@
+2025-03-05 04:17:58,484 INFO: Starting application in development mode [in F:\PythonII\Dating\app\utils\logging.py:43]
+2025-03-05 04:17:59,234 INFO: Admin user already exists. [in F:\PythonII\Dating\app\__init__.py:24]
+2025-03-05 04:17:59,254 WARNING:  * Debugger is active! [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 04:17:59,266 INFO:  * Debugger PIN: 132-194-637 [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
+2025-03-05 04:18:32,531 INFO:  * Detected change in 'F:\\PythonII\\Dating\\app\\profile\\routes.py', reloading [in F:\PythonII\Dating\.venv\Lib\site-packages\werkzeug\_internal.py:97]
