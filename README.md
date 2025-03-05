@@ -1,60 +1,98 @@
-# Marriage Matchmaking System | نظام الزواج التوفيقي
+# Marriage Matchmaking System
 
-## Features | المميزات
+A Flask-based web application for marriage matchmaking services.
 
-### User Management | إدارة المستخدمين
-- User registration with phone number verification | تسجيل المستخدمين مع التحقق من رقم الهاتف
-- Secure login system | نظام تسجيل دخول آمن
-- Password reset via WhatsApp | إعادة تعيين كلمة المرور عبر واتساب
-- Profile management | إدارة الملف الشخصي
-- Password change functionality | إمكانية تغيير كلمة المرور
+## Features
 
-### Profile Features | مميزات الملف الشخصي
-- Comprehensive personal information | معلومات شخصية شاملة:
-  - Age | العمر
-  - Nationality | الجنسية
-  - Height and Weight | الطول والوزن
-  - Skin Color | لون البشرة
-  - Employment Status | الحالة الوظيفية
-  - Tribe | القبيلة
-  - Smoking Status | حالة التدخين
-  - Marital Status | الحالة الاجتماعية
-  - Educational Qualifications | المؤهلات التعليمية
-  - Location (Area/City) | الموقع (المنطقة/المدينة)
-  - Marriage Type (Public/Private) | نوع الزواج (معلن/غير معلن)
-  - Personal Description | وصف شخصي
-  - Partner Requirements | متطلبات الشريك
+- User authentication (login, registration, password reset)
+- Profile creation and management
+- Search for potential matches based on criteria
+- Admin dashboard for user management
+- Secure password handling
+- WhatsApp notifications for match requests
 
-### Search Functionality | وظائف البحث
-- Advanced search filters | فلاتر بحث متقدمة:
-  - Gender | الجنس
-  - Age Range | نطاق العمر
-  - Nationality | الجنسية
-  - Physical Characteristics | الخصائص الجسدية
-  - Social Status | الحالة الاجتماعية
-  - Location | الموقع
-- Detailed search results | نتائج بحث مفصلة
+## Project Structure
 
-### Communication System | نظام التواصل
-- Request communication with potential matches | طلب التواصل مع الشركاء المحتملين
-- WhatsApp notifications | إشعارات عبر واتساب
-- Request management system | نظام إدارة الطلبات
+```
+Marriage-Matchmaking-System/
+├── app/                        # Main application package
+│   ├── __init__.py             # Application factory
+│   ├── auth/                   # Authentication module
+│   │   ├── __init__.py
+│   │   └── routes.py           # Authentication routes
+│   ├── profile/                # Profile module
+│   │   ├── __init__.py
+│   │   └── routes.py           # Profile routes
+│   ├── admin/                  # Admin module
+│   │   ├── __init__.py
+│   │   └── routes.py           # Admin routes
+│   ├── models/                 # Database models
+│   │   ├── __init__.py
+│   │   └── models.py           # SQLAlchemy models
+│   ├── services/               # Business logic services
+│   │   ├── __init__.py
+│   │   ├── auth_service.py     # Authentication service
+│   │   ├── profile_service.py  # Profile service
+│   │   ├── request_service.py  # Match request service
+│   │   └── admin_service.py    # Admin service
+│   ├── utils/                  # Utility functions
+│   │   ├── __init__.py
+│   │   ├── password.py         # Password utilities
+│   │   ├── notifications.py    # Notification utilities
+│   │   └── logging.py          # Logging utilities
+│   ├── static/                 # Static files (CSS, JS, images)
+│   └── templates/              # Jinja2 templates
+├── migrations/                 # Database migrations
+├── Logs/                       # Application logs
+├── config.py                   # Configuration settings
+├── init_db.py                  # Database initialization script
+├── run.py                      # Application entry point
+├── copy_assets.py              # Script to copy templates and static files
+└── requirements.txt            # Project dependencies
+```
 
-### Administrative Features | مميزات الإدارة
-- User management dashboard | لوحة تحكم إدارة المستخدمين
-- Export data functionality | وظيفة تصدير البيانات
-- Reset user passwords | إعادة تعيين كلمات مرور المستخدمين
-- Delete user accounts | حذف حسابات المستخدمين
+## Installation
 
-### Security Features | ميزات الأمان
-- Encrypted passwords | تشفير كلمات المرور
-- Session management | إدارة الجلسات
-- Protected routes | مسارات محمية
-- Input validation | التحقق من صحة المدخلات
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/Marriage-Matchmaking-System.git
+cd Marriage-Matchmaking-System
+```
 
-### Technical Features | الميزات التقنية
-- Responsive design | تصميم متجاوب
-- RTL support | دعم الكتابة من اليمين إلى اليسار
-- Bootstrap UI framework | إطار عمل Bootstrap للواجهة
-- MySQL database | قاعدة بيانات MySQL
-- Flask backend | خلفية Flask
+2. Create and activate a virtual environment:
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Initialize the database:
+```bash
+python init_db.py
+```
+
+5. Run the application:
+```bash
+python run.py
+```
+
+6. Access the application at http://localhost:5050
+
+## Checkpoints
+
+### Checkpoint 1 - 2025-03-05
+- Restructured project to follow Flask application factory pattern
+- Created modular architecture with blueprints for auth and profile
+- Implemented service layer for business logic
+- Added database models with improved naming conventions
+- Set up logging system
+- Added database migration support
+- Created configuration management system
+
+To revert to this checkpoint:
+```bash
+git checkout checkpoint-1

@@ -1,0 +1,176 @@
+{% extends 'theme.html' %}
+
+{% block title %}
+الملف الشخصي
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p class="text-center fs-2 fw-bold text-primary my-2">الملف الشخصي</p>
+    <hr>
+
+    <table class="table">
+        <tr>
+            <td style="width:fit-content">الإسم بالكامل:</td>
+            <td style="text-align: right;">{{ account['fullname'] }}</td>
+        </tr>
+        <tr>
+            <td style="width:fit-content"> رقم الجوال:</td>
+            <td style="text-align: right;">{{ account['phoneno'] }}</td>
+        </tr>
+    </table>
+
+    <details>
+        <summary><a>تغيير كلمة المرور</a></summary>
+        <br/>
+        <div class="profile">
+        <form method="POST" action="{{ url_for('change_password') }}">
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <label for="current_password">كلمة السر الحالية</label>
+                            <input type="password" name="current_password" id="current_password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="new_password">كلمة السر الجديدة</label>
+                            <input type="password" name="new_password" id="new_password">
+                        </td>
+                        <td>
+                            <label for="confirm_password">تأكيد كلمة السر</label>
+                            <input type="password" name="confirm_password" id="confirm_password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                                <input type="submit" name="Save" value="تغيير">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+        </div>
+    </details>
+
+    <hr class="text-primary">
+
+</div>
+<div class="profile container">
+    <form action="{{ url_for('profile') }}" method="post" autocomplete="on">
+
+    <label for="gender">الجنس</label>
+    <div class="form-group radio">
+        <input type="radio" name="gender" value="ذكر"  id="gender" {%if data.gender=='ذكر' or not data.gender%}checked{%endif%}/>
+        <span class="radio-span">ذكر</span>
+        <input type="radio" name="gender" value="أنثى" id="gender" {%if data.gender=='أنثى'%}checked{%endif%}/>
+        <span class="radio-span">أنثى </span>
+    </div>
+
+    <label for="nationality">الجنسية</label>
+    <input type="text" name="nationality" placeholder="الجنسية" id="nationality" value="{{data.nationality}}">
+
+    <label for="age">العمر</label>
+    <input type="number" name="age" placeholder="العمر" id="age" min="10" max="120" value="{%if not data.age%}18{%else%}{{data.age}}{%endif%}">
+
+    <label for="length">الطول</label>
+    <input type="number" name="length" placeholder="الطول بالسنتيميتر" id="length" min="100" max="300" value="{%if not data.length%}160{%else%}{{data.length}}{%endif%}">
+
+    <label for="weight">الوزن</label>
+    <input type="number" name="weight" placeholder="الوزن بالكيلوجرام" id="weight" min="10" max="300" value="{%if not data.weight%}70{%else%}{{data.weight}}{%endif%}">
+
+    <label for="color">لون البشرة</label>
+    <input type="text" name="color" placeholder="لون البشرة" id="color" value="{{data.color}}">
+
+    <label for="jobstatus">الحالة الوظيفية</label>
+    <input type="text" name="jobstatus" placeholder="الحالة الوظيفية" id="jobstatus" value="{{data.jobstatus}}">
+
+    <label for="qabila">القبيلة</label>
+    <input type="text" name="qabila" placeholder="القبيلة" id="qabila" value="{{data.qabila}}">
+
+    <label for="smokingstatus">مدخن</label>
+    <div class="form-group radio">
+        <input type="radio" name="smokingstatus" value="1"  id="smokingstatus" {%if data.smokingstatus==1 or not data.smokingstatus%}checked{%endif%}/>
+        <span class="radio-span">نعم</span>
+        <input type="radio" name="smokingstatus" value="0" id="smokingstatus" {%if data.smokingstatus==0 %}checked{%endif%}/>
+        <span class="radio-span">لا </span>
+    </div>
+
+    <label for="martialstatus">الحالة الإجتماعية</label>
+    <div class="form-group radio">
+        <div class="form-group radio content">
+            <input type="radio" name="martialstatus" value="أعزب"  id="martialstatus" {%if data.martialstatus=='أعزب' or not data.martialstatus%}checked{%endif%}/>
+            <span class="radio-span">أعزب</span>
+            <input type="radio" name="martialstatus" value="متزوج و لدي أبناء" id="martialstatus" {%if data.martialstatus=='متزوج و لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">متزوج و لدي أبناء </span>
+            <input type="radio" name="martialstatus" value="متزوج و ليس لدي أبناء" id="martialstatus" {%if data.martialstatus=='متزوج وليس لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">متزوج و ليس لدي أبناء </span>
+            <input type="radio" name="martialstatus" value="مطلق و لدي أبناء" id="martialstatus" {%if data.martialstatus=='مطلق و لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">مطلق و لدي أبناء </span>
+            <input type="radio" name="martialstatus" value="مطلق و ليس لدي أبناء" id="martialstatus" {%if data.martialstatus=='مطلق و ليس لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">مطلق و ليس لدي أبناء </span>
+            <input type="radio" name="martialstatus" value="أرمل و لدي أبناء" id="martialstatus" {%if data.martialstatus=='أرمل و لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">أرمل و لدي أبناء </span>
+            <input type="radio" name="martialstatus" value="أرمل و ليس لدي أبناء" id="martialstatus" {%if data.martialstatus=='أرمل و ليس لدي أبناء'%}checked{%endif%}/>
+            <span class="radio-span">أرمل و ليس لدي أبناء </span>
+        </div>
+    </div>
+
+    <label for="area">المنطقة</label>
+    <input type="text" name="area" placeholder="المنطقة" id="area" value="{{data.area}}">
+
+    <label for="city">المدينة</label>
+    <input type="text" name="city" placeholder="المدينة" id="city" value="{{data.city}}">
+
+    <label for="origin">منطقه الأصل</label>
+    <input type="text" name="origin" placeholder="منطقه الأصل" id="origin" value="{{data.origin}}">
+
+    <label for="qualifications">المؤهل الدراسى</label>
+    <div class="form-group radio">
+        <input type="radio" name="qualifications" value="ثانوي"  id="qualifications" {%if data.qualifications=='ثانوي' or not data.qualifications%}checked{%endif%}/>
+        <span class="radio-span">ثانوي </span>
+        <input type="radio" name="qualifications" value="دبلوم بعد الثانوي" id="qualifications" {%if data.qualifications=='دبلوم بعد الثانوي'%}checked{%endif%}/>
+        <span class="radio-span">دبلوم بعد الثانوي </span>
+        <input type="radio" name="qualifications" value="جامعي" id="qualifications" {%if data.qualifications=='جامعي'%}checked{%endif%}/>
+        <span class="radio-span">جامعي </span>
+        <input type="radio" name="qualifications" value="ماجيستير" id="qualifications" {%if data.qualifications=='ماجيستير'%}checked{%endif%}/>
+        <span class="radio-span">ماجيستير </span>
+        <input type="radio" name="qualifications" value="دكتوراه" id="qualifications" {%if data.qualifications=='دكتوراه'%}checked{%endif%}/>
+        <span class="radio-span">دكتوراه </span>
+        <input type="radio" name="qualifications" value="أخرى" id="qualifications" {%if data.qualifications=='أخرى'%}checked{%endif%}/>
+        <span class="radio-span">أخرى </span>
+    </div>
+
+    <label for="marriagetype">نوع الزواج</label>
+    <div id="list1" class="dropdownchecklist">
+        <ul class="items">
+            <li><input type="checkbox" name="marriagetype" value="معلن" {{ "checked" if "معلن" in data.marriagetype else '' }}/>معلن</li>
+            <li><input type="checkbox" name="marriagetype" value="غير معلن" {{ "checked" if "غير معلن" in data.marriagetype else '' }}/>غير معلن</li>
+        </ul>
+    </div>
+
+    <label for="anothernationality">هل تقبل بجنسية أخرى</label>
+    <div class="form-group radio">
+        <input type="radio" name="anothernationality" value="1"  id="anothernationality" {%if data.anothernationality==1  or not data.anothernationality%}checked{%endif%}/>
+        <span class="radio-span">نعم</span>
+        <input type="radio" name="anothernationality" value="0" id="anothernationality" {%if data.anothernationality==0 %}checked{%endif%}/>
+        <span class="radio-span">لا </span>
+    </div>
+
+    <label for="about">تحدث عن نفسك</label>
+    <textarea name="about" placeholder="تحدث عن نفسك" id="about" rows="5" >{{data.about}}</textarea>
+
+    <label for="requirments">تحدث عن الشريك</label>
+    <textarea name="requirments" placeholder="تحدث عن الشريك" id="requirments" rows="5" >{{data.requirments}}</textarea>
+
+    <div class="button-container">
+        <input class="button" type="submit" name="Save" value=" حفظ الملف">
+        <input class="button" type="submit" name="Delete" value="حذف الملف">
+    </div>
+
+</form>
+
+</div>
+
+{% endblock %}
