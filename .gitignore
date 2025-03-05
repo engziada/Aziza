@@ -1,0 +1,38 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Environment variables
+.env
+
+# Database files
+*.db
+*.sqlite3
+
+# Logs - Note: We're NOT ignoring the Logs folder to keep it accessible for debugging
+# Logs/
+
+# OS specific files
+.DS_Store
+Thumbs.db

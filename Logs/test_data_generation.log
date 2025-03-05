@@ -1,0 +1,24 @@
+2025-03-05 02:02:28,355 - INFO - Starting test data generation
+2025-03-05 02:02:28,371 - INFO - Creating marital statuses
+2025-03-05 02:02:28,389 - INFO - Marital statuses created
+2025-03-05 02:02:28,391 - INFO - Creating 50 random users
+2025-03-05 02:03:02,942 - INFO - Created 50 users
+2025-03-05 02:03:02,942 - INFO - Creating profiles for 50 users
+2025-03-05 02:03:03,007 - INFO - Created 50 profiles
+2025-03-05 02:03:03,007 - INFO - Creating 100 random match requests
+2025-03-05 02:03:03,262 - INFO - Created 91 match requests
+2025-03-05 02:03:03,262 - INFO - Test data generation completed successfully
+2025-03-05 02:17:41,496 - INFO - Starting test data generation
+2025-03-05 02:17:41,515 - WARNING - Database already contains 52 users. Skipping data generation.
+2025-03-05 02:20:10,453 - INFO - Starting test data generation
+2025-03-05 02:20:13,394 - INFO - Clearing database
+2025-03-05 02:20:13,425 - INFO - Database cleared successfully
+2025-03-05 02:20:13,427 - INFO - Creating marital statuses
+2025-03-05 02:20:13,446 - INFO - Marital statuses created
+2025-03-05 02:20:13,446 - INFO - Creating 50 random users
+2025-03-05 02:20:59,328 - INFO - Created 50 users
+2025-03-05 02:20:59,328 - INFO - Creating profiles for 50 users
+2025-03-05 02:20:59,381 - INFO - Created 50 profiles
+2025-03-05 02:20:59,381 - INFO - Creating 100 random match requests
+2025-03-05 02:20:59,617 - INFO - Created 96 match requests
+2025-03-05 02:20:59,617 - INFO - Test data generation completed successfully

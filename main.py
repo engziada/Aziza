@@ -15,7 +15,7 @@ app.config["SECRET_KEY"] ="12qwaszx#E"
 # MySQL database configuration parameters
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"] = "P@ssw0rd1234567"
+app.config["MYSQL_PASSWORD"] = "mazisvip"
 app.config["MYSQL_DB"] = "dating"
 app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
