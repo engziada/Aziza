@@ -139,6 +139,11 @@ dating_app/
 - Standardized database models with better naming conventions
 - Added database migration support
 
+### Checkpoint 2: Git Configuration and .gitignore Update (2025-03-05)
+- Updated .gitignore file with proper exclusions
+- Configured Logs folder to be tracked in git for debugging purposes
+- Fixed remote repository configuration
+
 To revert to this checkpoint:
 ```
 git checkout <commit-hash>
